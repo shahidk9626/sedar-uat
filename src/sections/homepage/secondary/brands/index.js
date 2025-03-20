@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "next-i18next";
 import PropTypes from "prop-types";
+import React from "react";
 
 const Brands = ({ data = {} }) => {
   const { t: translate } = useTranslation();
@@ -221,4 +222,4 @@ Brands.propTypes = {
   data: PropTypes.object,
 };
 
-export default Brands;
+export default React.memo(Brands);

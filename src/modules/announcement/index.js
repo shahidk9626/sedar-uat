@@ -143,4 +143,4 @@ const AnnouncementModule = ({ data, enq_type = "C" }) => {
   );
 };
 
-export default AnnouncementModule;
+export default React.memo(AnnouncementModule);
