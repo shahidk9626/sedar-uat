@@ -20,7 +20,7 @@ export default function MyDocument(props) {
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link rel="icon" href="/favicon.ico" />
 
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script async id="google-analytics" strategy="afterInteractive">
           {`
            window.dataLayer = window.dataLayer || [];
            function gtag(){window.dataLayer.push(arguments);}
@@ -32,7 +32,7 @@ export default function MyDocument(props) {
          `}
         </Script>
 
-        <Script id="Facebook-Pixel" strategy="afterInteractive">
+        <Script async id="Facebook-Pixel" strategy="afterInteractive">
           {`
           !(function (f, b, e, v, n, t, s) {
             if (f.fbq) return;
@@ -63,7 +63,7 @@ export default function MyDocument(props) {
           />
         </noscript>
 
-        <Script id="Tiktok-analytics" strategy="afterInteractive">
+        <Script async id="Tiktok-analytics" strategy="afterInteractive">
           {`
           !function (w, d, t) {
             w.TiktokAnalyticsObject = t;
@@ -101,7 +101,7 @@ export default function MyDocument(props) {
          `}
         </Script>
 
-        <Script id="microsoft-clarity-tracking" strategy="afterInteractive">
+        <Script async id="microsoft-clarity-tracking" strategy="afterInteractive">
           {`
           (function(c, l, a, r, i, t, y) {
             c[a] = c[a] || function() { (c[a].q = c[a].q || []).push(arguments); };
@@ -114,7 +114,7 @@ export default function MyDocument(props) {
          `}
         </Script>
 
-        <Script id="yandex-metrika" strategy="afterInteractive">
+        <Script async id="yandex-metrika" strategy="afterInteractive">
           {`
           (function(m, e, t, r, i, k, a) {
             m[i] = m[i] || function() { (m[i].a = m[i].a || []).push(arguments); };
@@ -160,6 +160,7 @@ export default function MyDocument(props) {
           }}
         />
         <Script
+          async 
           id="google-gtm"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
