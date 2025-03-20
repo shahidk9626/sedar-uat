@@ -89,6 +89,8 @@ const SliderBox = ({ data = [], index = 0 }) => {
                 ) : (
                   <CustomLink link={childItem.link_url} lang={locale}>
                     <NextLazyLoadImage
+                      priority // Forces early load
+                      quality={75}
                       src={childItem?.image_path}
                       alt={childItem?.image_path}
                       sx={{
@@ -114,6 +116,8 @@ const SliderBox = ({ data = [], index = 0 }) => {
                       downXsWidth={0}
                     />
                     <NextLazyLoadImage
+                      priority // Forces early load
+                      quality={75}
                       src={childItem?.image_path_portrait}
                       alt={childItem?.image_path_portrait}
                       sx={{
