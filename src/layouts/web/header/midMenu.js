@@ -58,7 +58,7 @@ const MidMenu = ({ layout = [], isRu }) => {
                       height: "24px!important",
                     }}
                     src={item?.image_path}
-                    alt=""
+                    alt={item?.content}
                     width={32}
                     height={24}
                   />
