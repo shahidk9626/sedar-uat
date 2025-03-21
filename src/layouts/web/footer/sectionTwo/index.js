@@ -13,7 +13,7 @@ import { useCallback, useState } from "react";
 import { countries_lang } from "../../../../utils/countriesData";
 import { useRouter } from 'next/router';
 import NextLink from "next/link";
-
+import {  ListItem } from "@mui/material";
 const StyledTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.common.white,
   fontFamily: theme.fontFaces.helveticaNeueMedium,
@@ -21,7 +21,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 
 const SectionTwo = ({ secondSection = [] }) => {
   const [open, setOpen] = useState(null);
-  const [index4Open, setIndex4Open] = useState(false); 
+  const [index4Open, setIndex4Open] = useState(false);
   const isDownSm = useResponsive("down", "sm");
 
   const handleClick = useCallback(
@@ -131,27 +131,32 @@ const SectionTwo = ({ secondSection = [] }) => {
               // Show index 4's list only if clicked on mobile view
               <>
                 {isDownSm ? (
-                  <CustomListButton onClick={handleIndex4Click} >
-                    <ListItemText
-                    component="li"
-                      primary={
-                        <StyledTypography
-                          component="li"
-                          variant="subtitle1"
-                          fontWeight={400}
-                          sx={{ listStyleType: 'none' ,marginBottom:"15px"}}
-
-                        >
-                          {item?.content}
-                        </StyledTypography>
-                      }
-                    />
-                    {index4Open ? (
-                      <RemoveIcon sx={{ color: "common.white" }} fontSize="small" />
-                    ) : (
-                      <AddIcon sx={{ color: "common.white" }} fontSize="small" />
-                    )}
-                  </CustomListButton>
+                  <List component="ul" sx={{ paddingLeft: "20px" }}>
+                    <ListItem
+                      component="li"
+                      disableGutters
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
+                      <CustomListButton onClick={handleIndex4Click}>
+                        <ListItemText
+                          primary={
+                            <StyledTypography
+                              variant="subtitle1"
+                              fontWeight={400}
+                              sx={{ listStyleType: "none", marginBottom: "15px" }}
+                            >
+                              {item?.content}
+                            </StyledTypography>
+                          }
+                        />
+                        {index4Open ? (
+                          <RemoveIcon sx={{ color: "common.white" }} fontSize="small" />
+                        ) : (
+                          <AddIcon sx={{ color: "common.white" }} fontSize="small" />
+                        )}
+                      </CustomListButton>
+                    </ListItem>
+                  </List>
                 ) : (
                   <StyledTypography
                     component="li"
@@ -165,7 +170,7 @@ const SectionTwo = ({ secondSection = [] }) => {
                   </StyledTypography>
                 )}
 
-                <Collapse in={!isDownSm ? true : index4Open} component="li" sx={!isDownSm ? { marginTop:"-30px"} : { marginTop:"-25px"}}>
+                <Collapse in={!isDownSm ? true : index4Open} component="li" sx={!isDownSm ? { marginTop: "-30px" } : { marginTop: "-25px" }}>
                   {Object.values(countries_lang[0][locale.split("-")[1]]).map(
                     (row, i) => (
                       <List
