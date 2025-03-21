@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
@@ -28,7 +29,6 @@
     "axios": "^1.7.5",
     "clsx": "^2.1.1",
     "cookies-next": "^4.2.1",
-    "cross-env": "^7.0.3",
     "css-minimizer-webpack-plugin": "^7.0.0",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.13",
@@ -85,7 +85,9 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8",
-    "eslint-config-next": "14.2.6"
+    "eslint-config-next": "14.2.6",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }
