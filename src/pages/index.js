@@ -1,5 +1,5 @@
 import WebLayout from "@/layouts/web";
-import SeoHeader from "@/modules/seoHeader";
+// import SeoHeader from "@/modules/seoHeader";
 import WebSiteShema from "@/modules/websiteSchema";
 import { useDispatch } from "@/redux/store";
 import { setSSGReduxCookies } from "@/utils/serverSideAction";
@@ -23,6 +23,7 @@ import DynamicComponentRenderer, {
 } from "@/components/importDynamicComponents";
 import StickyBar from "@/sections/homepage/primary/landing/stickyBar";
 import PropTypes from "prop-types";
+import dynamic from 'next/dynamic';
 
 export const getStaticProps = async (context) => {
   const { locale } = context;
@@ -107,7 +108,9 @@ export default function Home(props) {
   const isDownLg = useResponsive("down", "lg");
   const isUpLg = useResponsive("up", "lg");
   const { locale } = router;
-
+  const SeoHeader = dynamic(() => import('@/modules/seoHeader'), {
+    ssr: false,
+  });
   React.useEffect(() => {
     setHomePageData(props);
   }, [props]);
