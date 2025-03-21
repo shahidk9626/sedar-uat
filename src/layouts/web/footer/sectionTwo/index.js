@@ -13,7 +13,7 @@ import { useCallback, useState } from "react";
 import { countries_lang } from "../../../../utils/countriesData";
 import { useRouter } from 'next/router';
 import NextLink from "next/link";
-
+import ListItem from "@mui/material/ListItem";
 const StyledTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.common.white,
   fontFamily: theme.fontFaces.helveticaNeueMedium,
@@ -21,7 +21,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 
 const SectionTwo = ({ secondSection = [] }) => {
   const [open, setOpen] = useState(null);
-  const [index4Open, setIndex4Open] = useState(false); 
+  const [index4Open, setIndex4Open] = useState(false);
   const isDownSm = useResponsive("down", "sm");
 
   const handleClick = useCallback(
@@ -79,34 +79,36 @@ const SectionTwo = ({ secondSection = [] }) => {
   const renderChildItems = useCallback(
     (child, childIndex) =>
       isDownSm !== undefined && (
-        <CustomLink key={`Child-Datas-${childIndex}`} link={child.link_url}>
-          <ListItemText
-            component="li"
-            sx={(theme) => ({
-              "& .MuiTypography-root": {
-                fontFamily: theme.fontFaces.helveticaNeueMedium,
-                fontWeight: 500,
-                color: "grey.1100",
-                cursor: "pointer",
-                fontSize: {
-                  lg: "14px",
-                  md: "14px",
-                  sm: "16px",
-                  xs: "16px",
-                  xxs: "16px",
+        <ListItem component="li">
+          <CustomLink key={`Child-Datas-${childIndex}`} link={child.link_url}>
+            <ListItemText
+              component="li"
+              sx={(theme) => ({
+                "& .MuiTypography-root": {
+                  fontFamily: theme.fontFaces.helveticaNeueMedium,
+                  fontWeight: 500,
+                  color: "grey.1100",
+                  cursor: "pointer",
+                  fontSize: {
+                    lg: "14px",
+                    md: "14px",
+                    sm: "16px",
+                    xs: "16px",
+                    xxs: "16px",
+                  },
+                  lineHeight: {
+                    lg: "40px",
+                    md: "40px",
+                    sm: "46px",
+                    xs: "46px",
+                    xxs: "46px",
+                  },
                 },
-                lineHeight: {
-                  lg: "40px",
-                  md: "40px",
-                  sm: "46px",
-                  xs: "46px",
-                  xxs: "46px",
-                },
-              },
-            })}
-            primary={child?.content}
-          />
-        </CustomLink>
+              })}
+              primary={child?.content}
+            />
+          </CustomLink>
+        </ListItem>
       ),
     []
   );
@@ -133,13 +135,13 @@ const SectionTwo = ({ secondSection = [] }) => {
                 {isDownSm ? (
                   <CustomListButton onClick={handleIndex4Click} >
                     <ListItemText
-                    component="li"
+                      component="li"
                       primary={
                         <StyledTypography
                           component="li"
                           variant="subtitle1"
                           fontWeight={400}
-                          sx={{ listStyleType: 'none' ,marginBottom:"15px"}}
+                          sx={{ listStyleType: 'none', marginBottom: "15px" }}
 
                         >
                           {item?.content}
@@ -165,7 +167,7 @@ const SectionTwo = ({ secondSection = [] }) => {
                   </StyledTypography>
                 )}
 
-                <Collapse in={!isDownSm ? true : index4Open} component="li" sx={!isDownSm ? { marginTop:"-30px"} : { marginTop:"-25px"}}>
+                <Collapse in={!isDownSm ? true : index4Open} component="li" sx={!isDownSm ? { marginTop: "-30px" } : { marginTop: "-25px" }}>
                   {Object.values(countries_lang[0][locale.split("-")[1]]).map(
                     (row, i) => (
                       <List
