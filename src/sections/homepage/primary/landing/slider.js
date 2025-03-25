@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import Slider from "react-slick";
 import CountryCard from "./countryCard";
 import Introduction from "./introduction";
+import React, { useMemo } from "react";
 
 LandingPageSlider.propTypes = {
   data: PropTypes.array.isRequired,
