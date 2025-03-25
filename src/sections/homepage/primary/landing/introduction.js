@@ -10,13 +10,14 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { Link } from '@mui/material';
-import React,{useMemo} from "react";
+import React, { useMemo } from "react";
 const Introduction = ({ data = [], findLastObject = {}, swiperInstance }) => {
-  const getData =
-    data?.CHILD && data?.CHILD?.length > 0
-      ? data?.CHILD
-      : null;
-    console.log('getdata',data);
+  const getData = useMemo(() => data?.CHILD && data?.CHILD?.length > 0
+    ? data?.CHILD
+    : null);
+  console.log('getdata', data);
+  const subChildIcons = useMemo(() => getData?.[4]?.SUB_CHILD || [], [getData]);
+  const subChildLinks = useMemo(() => getData?.[0]?.SUB_CHILD || [], [getData]);
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
       "#watch-video"
@@ -98,9 +99,9 @@ const Introduction = ({ data = [], findLastObject = {}, swiperInstance }) => {
             </Stack>
             <Box sx={{ position: "absolute", bottom: 30 }}>
 
-              <Stack direction="row" spacing={3}>
-                {getData?.[4]?.SUB_CHILD?.map((icon, index) => {
-                  return (
+              {subChildIcons.length > 0 && (
+                <Stack direction="row" spacing={3}>
+                  {subChildIcons.map((icon, index) => (
                     <Box key={`ICON_LANDING-${index}`}>
                       <CustomLink link={icon.link_url} target="_blank">
                         <NextFillImage
@@ -124,293 +125,287 @@ const Introduction = ({ data = [], findLastObject = {}, swiperInstance }) => {
                         />
                       </CustomLink>
                     </Box>
-                  );
-                })}
-              </Stack>
+                  ))}
+                </Stack>
+              )}
             </Box>
           </Box>
         </Grid>
         <Grid item md={8.5} sm={12} xs={12} xxs={12}>
 
           <Stack height="100dvh" justifyContent="space-between">
-            <Stack
-              direction="row"
-              spacing={2}
-              justifyContent="end"
-              p={2}
-              height="10%"
-              mt={3}
-            >
-              {
-                getData &&
-                getData?.[0]?.SUB_CHILD &&
-                getData?.[0]?.SUB_CHILD?.length > 0 &&
-                getData?.[0]?.SUB_CHILD?.map((item, index) => {
-                  return (
-                    <Stack
-                      key={`${item?.title}-${index}`}
-                      direction="row"
-                      alignItems="center"
-                      spacing={1}
+            {subChildLinks.length > 0 && (
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="end"
+                p={2}
+                height="10%"
+                mt={3}
+              >
+                {subChildLinks.map((item, index) => (
+                  <Stack
+                    key={`${item?.title}-${index}`}
+                    direction="row"
+                    alignItems="center"
+                    spacing={1}
+                  >
+                    <NextFillImage
+                      src={item?.image_path}
+                      className="without_hover"
+                      sx={{
+                        "&.MuiCard-root": {
+                          borderRadius: 0,
+                          boxShadow: "none",
+                          position: "relative!important",
+                          width: "15px!important",
+                          height: "15px!important",
+                        },
+                      }}
+                      alt="Image"
+                    />
+                    <Box
+                      component="a"
+                      href={item?.link_url}
+                      sx={{ textDecoration: "none", color: "common.black" }}
                     >
-                      <NextFillImage
-                        src={item?.image_path}
-                        className="without_hover"
-                        sx={{
-                          "&.MuiCard-root": {
-                            borderRadius: 0,
-                            boxShadow: "none",
-                            position: "relative!important",
-                            width: "15px!important",
-                            height: "15px!important",
-                          },
-                        }}
-                        alt='Image'
-                      />
-                      <Box
-                        component="a"
-                        href={item?.link_url}
-                        sx={{ textDecoration: "none", color: "common.black" }}
+                      <Typography
+                        fontFamily={(theme) => theme.fontFaces.helveticaNeueMedium}
+                        component="div"
                       >
-                        <Typography
-                          fontFamily={(theme) =>
-                            theme.fontFaces.helveticaNeueMedium
-                          }
-                          component="div"
-                        >
-                          {item?.title}
-                        </Typography>
-                      </Box>
-                    </Stack>
-                  );
-                })}
-            </Stack>
+                        {item?.title}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                ))}
+              </Stack>
+            )}
 
             <Box pb={12}>
-              <Grid container spacing={2} sx={{ height: "max-content",marginLeft:"-23px!important" }}>
+              <Grid container spacing={2} sx={{ height: "max-content", marginLeft: "-23px!important" }}>
                 <Grid item md={12}>
                   <Grid container spacing={2} pl={0}>
                     {getData?.[3]?.SUB_CHILD?.map(
                       (elem, index) => {
                         // if (findLastObject != elem) {
-                          return (
-                            <Grid item md={3} key={index}>
-                              <CustomLink
-                                link={
-                                  elem?.GRAND_CHILD &&
-                                    elem?.GRAND_CHILD?.length > 0 &&
-                                    elem?.GRAND_CHILD?.[1]?.link_url
-                                    ? elem?.GRAND_CHILD?.[1]?.link_url
-                                    : "#"
-                                }
-                                sx={{
-                                  ":focus": {
-                                    "& .MuiCard-root": {
-                                      backgroundColor: (theme) =>
-                                        theme.palette.primary.light,
-                                      "& .without_hover ": {
-                                        display: "none",
-                                      },
-
-                                      "& .with_hover ": {
-                                        display: "block",
-                                      },
-                                    },
-                                  },
-                                  ":focus-within": {
-                                    "& .MuiCard-root": {
-                                      backgroundColor: (theme) =>
-                                        theme.palette.primary.light,
-                                      "& .without_hover ": {
-                                        display: "none",
-                                      },
-
-                                      "& .with_hover ": {
-                                        display: "block",
-                                      },
-                                    },
-                                  },
-                                  ":hover": {
-                                    "& .MuiCard-root": {
-                                      backgroundColor: (theme) =>
-                                        theme.palette.primary.light,
-                                      "& .without_hover ": {
-                                        display: "none",
-                                      },
-
-                                      "& .with_hover ": {
-                                        display: "block",
-                                      },
-                                    },
-                                  },
-                                }}
-                              >
-                                <Card
-                                  component="div"
-                                  sx={(theme) => ({
-                                    borderRadius: "0px",
-                                    height: "100%",
-                                    cursor: "pointer",
-                                    "& .with_hover ": {
+                        return (
+                          <Grid item md={3} key={index}>
+                            <CustomLink
+                              link={
+                                elem?.GRAND_CHILD &&
+                                  elem?.GRAND_CHILD?.length > 0 &&
+                                  elem?.GRAND_CHILD?.[1]?.link_url
+                                  ? elem?.GRAND_CHILD?.[1]?.link_url
+                                  : "#"
+                              }
+                              sx={{
+                                ":focus": {
+                                  "& .MuiCard-root": {
+                                    backgroundColor: (theme) =>
+                                      theme.palette.primary.light,
+                                    "& .without_hover ": {
                                       display: "none",
                                     },
-                                    ":hover": {
-                                      "&.MuiCard-root": {
-                                        backgroundColor: (theme) =>
-                                          theme.palette.primary.light,
-                                        "& .without_hover ": {
-                                          display: "none",
-                                        },
 
-                                        "& .with_hover ": {
-                                          display: "block",
-                                        },
+                                    "& .with_hover ": {
+                                      display: "block",
+                                    },
+                                  },
+                                },
+                                ":focus-within": {
+                                  "& .MuiCard-root": {
+                                    backgroundColor: (theme) =>
+                                      theme.palette.primary.light,
+                                    "& .without_hover ": {
+                                      display: "none",
+                                    },
+
+                                    "& .with_hover ": {
+                                      display: "block",
+                                    },
+                                  },
+                                },
+                                ":hover": {
+                                  "& .MuiCard-root": {
+                                    backgroundColor: (theme) =>
+                                      theme.palette.primary.light,
+                                    "& .without_hover ": {
+                                      display: "none",
+                                    },
+
+                                    "& .with_hover ": {
+                                      display: "block",
+                                    },
+                                  },
+                                },
+                              }}
+                            >
+                              <Card
+                                component="div"
+                                sx={(theme) => ({
+                                  borderRadius: "0px",
+                                  height: "100%",
+                                  cursor: "pointer",
+                                  "& .with_hover ": {
+                                    display: "none",
+                                  },
+                                  ":hover": {
+                                    "&.MuiCard-root": {
+                                      backgroundColor: (theme) =>
+                                        theme.palette.primary.light,
+                                      "& .without_hover ": {
+                                        display: "none",
+                                      },
+
+                                      "& .with_hover ": {
+                                        display: "block",
                                       },
                                     },
-                                  })}
-                                >
-                                  <Box px={1} py={2}>
+                                  },
+                                })}
+                              >
+                                <Box px={1} py={2}>
+                                  <Stack
+                                    direction="row"
+                                    spacing={2}
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    sx={{ height: "100%!important" }}
+                                  >
+                                    <Box>
+                                      <NextLazyLoadImage
+                                        className="without_hover"
+                                        src={elem.image_path}
+                                        sx={{
+                                          borderRadius: 0,
+                                          boxShadow: "none",
+                                          position: "relative!important",
+                                          width: "50px!important",
+                                          height: "50px!important",
+                                        }}
+                                        width={50}
+                                        height={50}
+                                        upLgWidth={100}
+                                        downLgWidth={100}
+                                        downMdWidth={100}
+                                        downSmWidth={100}
+                                        downXsWidth={100}
+                                        alt={getData?.[0]?.image_path}
+                                        sizes="(min-width: 0px) and (max-width: 1920px) 40vw"
+                                        objectFit="contain"
+                                      />
+                                      <NextLazyLoadImage
+                                        className="with_hover"
+                                        src={elem.image_path_portrait}
+                                        sx={{
+                                          borderRadius: 0,
+                                          boxShadow: "none",
+                                          position: "relative!important",
+                                          width: "50px!important",
+                                          height: "50px!important",
+                                        }}
+                                        width={50}
+                                        height={50}
+                                        upLgWidth={100}
+                                        downLgWidth={100}
+                                        downMdWidth={100}
+                                        downSmWidth={100}
+                                        downXsWidth={100}
+                                        alt={getData?.[0]?.image_path}
+                                        sizes="(min-width: 0px) and (max-width: 1920px) 40vw"
+                                        objectFit="contain"
+                                      />
+                                    </Box>
                                     <Stack
-                                      direction="row"
-                                      spacing={2}
-                                      justifyContent="space-between"
+                                      direction="column"
+                                      spacing={1}
                                       alignItems="center"
-                                      sx={{ height: "100%!important" }}
                                     >
                                       <Box>
-                                        <NextLazyLoadImage
-                                          className="without_hover"
-                                          src={elem.image_path}
-                                          sx={{
-                                            borderRadius: 0,
-                                            boxShadow: "none",
-                                            position: "relative!important",
-                                            width: "50px!important",
-                                            height: "50px!important",
-                                          }}
-                                          width={50}
-                                          height={50}
-                                          upLgWidth={100}
-                                          downLgWidth={100}
-                                          downMdWidth={100}
-                                          downSmWidth={100}
-                                          downXsWidth={100}
-                                          alt={getData?.[0]?.image_path}
-                                          sizes="(min-width: 0px) and (max-width: 1920px) 40vw"
-                                          objectFit="contain"
-                                        />
-                                        <NextLazyLoadImage
-                                          className="with_hover"
-                                          src={elem.image_path_portrait}
-                                          sx={{
-                                            borderRadius: 0,
-                                            boxShadow: "none",
-                                            position: "relative!important",
-                                            width: "50px!important",
-                                            height: "50px!important",
-                                          }}
-                                          width={50}
-                                          height={50}
-                                          upLgWidth={100}
-                                          downLgWidth={100}
-                                          downMdWidth={100}
-                                          downSmWidth={100}
-                                          downXsWidth={100}
-                                          alt={getData?.[0]?.image_path}
-                                          sizes="(min-width: 0px) and (max-width: 1920px) 40vw"
-                                          objectFit="contain"
-                                        />
+                                        <CustomLink
+                                          link={
+                                            elem?.GRAND_CHILD &&
+                                              elem?.GRAND_CHILD?.length > 0 &&
+                                              elem?.GRAND_CHILD?.[1]?.link_url
+                                              ? elem?.GRAND_CHILD?.[0]
+                                                ?.link_url
+                                              : "#"
+                                          }
+                                        >
+                                          <Typography
+                                            sx={(theme) => ({
+                                              color: (theme) =>
+                                                theme.palette.common.black,
+                                              ":hover": {
+                                                color: (theme) =>
+                                                  theme.palette.common.white,
+                                              },
+                                              ...theme.typography
+                                                .typography18,
+                                              fontWeight: 800,
+                                              fontFamily:
+                                                theme.fontFaces
+                                                  .helveticaNeueLightArabic,
+                                              mb: 0,
+                                            })}
+                                          >
+                                            {elem?.GRAND_CHILD &&
+                                              elem?.GRAND_CHILD?.length > 0 &&
+                                              elem?.GRAND_CHILD?.[0]
+                                                ?.link_title}
+                                          </Typography>
+                                        </CustomLink>
                                       </Box>
-                                      <Stack
-                                        direction="column"
-                                        spacing={1}
-                                        alignItems="center"
-                                      >
-                                        <Box>
-                                          <CustomLink
-                                            link={
-                                              elem?.GRAND_CHILD &&
-                                                elem?.GRAND_CHILD?.length > 0 &&
-                                                elem?.GRAND_CHILD?.[1]?.link_url
-                                                ? elem?.GRAND_CHILD?.[0]
-                                                  ?.link_url
-                                                : "#"
-                                            }
-                                          >
-                                            <Typography
-                                              sx={(theme) => ({
+                                      <Box>
+                                        <CustomLink
+                                          link={
+                                            elem?.GRAND_CHILD &&
+                                              elem?.GRAND_CHILD?.length > 0 &&
+                                              elem?.GRAND_CHILD?.[1]?.link_url
+                                              ? elem?.GRAND_CHILD?.[1]
+                                                ?.link_url
+                                              : "#"
+                                          }
+                                        >
+                                          <Typography
+                                            sx={(theme) => ({
+                                              color: (theme) =>
+                                                theme.palette.common.black,
+                                              ":hover": {
                                                 color: (theme) =>
-                                                  theme.palette.common.black,
-                                                ":hover": {
-                                                  color: (theme) =>
-                                                    theme.palette.common.white,
-                                                },
-                                                ...theme.typography
-                                                  .typography18,
-                                                fontWeight: 800,
-                                                fontFamily:
-                                                  theme.fontFaces
-                                                    .helveticaNeueLightArabic,
-                                                mb: 0,
-                                              })}
-                                            >
-                                              {elem?.GRAND_CHILD &&
-                                                elem?.GRAND_CHILD?.length > 0 &&
-                                                elem?.GRAND_CHILD?.[0]
-                                                  ?.link_title}
-                                            </Typography>
-                                          </CustomLink>
-                                        </Box>
-                                        <Box>
-                                          <CustomLink
-                                            link={
-                                              elem?.GRAND_CHILD &&
-                                                elem?.GRAND_CHILD?.length > 0 &&
-                                                elem?.GRAND_CHILD?.[1]?.link_url
-                                                ? elem?.GRAND_CHILD?.[1]
-                                                  ?.link_url
-                                                : "#"
-                                            }
+                                                  theme.palette.common.white,
+                                              },
+                                              letterSpacing: 0,
+                                              ...theme.typography
+                                                .typography18,
+                                              fontWeight: "normal",
+                                              fontFamily:
+                                                theme.fontFaces
+                                                  .helveticaNeueMedium,
+                                              mb: 0,
+                                            })}
                                           >
-                                            <Typography
-                                              sx={(theme) => ({
-                                                color: (theme) =>
-                                                  theme.palette.common.black,
-                                                ":hover": {
-                                                  color: (theme) =>
-                                                    theme.palette.common.white,
-                                                },
-                                                letterSpacing: 0,
-                                                ...theme.typography
-                                                  .typography18,
-                                                fontWeight: "normal",
-                                                fontFamily:
-                                                  theme.fontFaces
-                                                    .helveticaNeueMedium,
-                                                mb: 0,
-                                              })}
-                                            >
-                                              {elem?.GRAND_CHILD &&
-                                                elem?.GRAND_CHILD?.length > 0 &&
-                                                elem?.GRAND_CHILD?.[1]
-                                                  ?.link_title}
-                                            </Typography>
-                                          </CustomLink>
-                                        </Box>
-                                      </Stack>
+                                            {elem?.GRAND_CHILD &&
+                                              elem?.GRAND_CHILD?.length > 0 &&
+                                              elem?.GRAND_CHILD?.[1]
+                                                ?.link_title}
+                                          </Typography>
+                                        </CustomLink>
+                                      </Box>
                                     </Stack>
-                                  </Box>
-                                </Card>
-                              </CustomLink>
-                            </Grid>
-                          );
+                                  </Stack>
+                                </Box>
+                              </Card>
+                            </CustomLink>
+                          </Grid>
+                        );
                         // }
                       }
                     )}
                   </Grid>
                 </Grid>
                 {/* <Grid item md={3}> */}
-                  {/* <CustomLink
+                {/* <CustomLink
                     link={
                       findLastObject?.GRAND_CHILD &&
                         findLastObject?.GRAND_CHILD?.length > 0 &&

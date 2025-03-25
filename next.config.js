@@ -8,6 +8,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const nextConfig = {
+  experimental: {
+    polyfillsOptimization: true,
+  },
   reactStrictMode: true,
   i18n,
   trailingSlash: false,
