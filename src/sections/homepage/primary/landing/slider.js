@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import Slider from "react-slick";
 import CountryCard from "./countryCard";
 import Introduction from "./introduction";
+import React, { useMemo } from "react";
 
 LandingPageSlider.propTypes = {
   data: PropTypes.array.isRequired,
@@ -28,11 +29,11 @@ export default function LandingPageSlider({ data, swiperInstance, isLanding }) {
     arrows: false,
   };
   const findLastObject = data?.PARENT?.CHILD?.[3]?.SUB_CHILD?.at(-1);
-
+  const sliderItems = useMemo(() => data?.PARENT?.CHILD?.[2]?.SUB_CHILD || [], [data]);
   return (
     <Box position="relative">
       <Slider {...settings}>
-        {data?.PARENT?.CHILD?.[2]?.SUB_CHILD?.map((elem, index) => (
+        {sliderItems.map((elem, index) => (
           <Box
             component="div"
             key={index}

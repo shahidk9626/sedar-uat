@@ -20,7 +20,7 @@ export default function MyDocument(props) {
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link rel="icon" href="/favicon.ico" />
 
-        {/* <Script async id="google-analytics" strategy="afterInteractive">
+        <Script async id="google-analytics" strategy="afterInteractive">
           {`
            window.dataLayer = window.dataLayer || [];
            function gtag(){window.dataLayer.push(arguments);}
@@ -30,9 +30,9 @@ export default function MyDocument(props) {
              debug_mode: true,
            });
          `}
-        </Script> */}
+        </Script>
 
-        {/* <Script async id="Facebook-Pixel" strategy="afterInteractive">
+        <Script async id="Facebook-Pixel" strategy="afterInteractive">
           {`
           !(function (f, b, e, v, n, t, s) {
             if (f.fbq) return;
@@ -53,16 +53,16 @@ export default function MyDocument(props) {
           fbq("init", "418641216127391");
           fbq("track", "PageView");
          `}
-        </Script> */}
-        {/* <noscript>
+        </Script>
+        <noscript>
           <img
             height="1"
             width="1"
             style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=418641216127391&ev=PageView&noscript=1"
           />
-        </noscript> */}
-{/* 
+        </noscript>
+
         <Script async id="Tiktok-analytics" strategy="afterInteractive">
           {`
           !function (w, d, t) {
@@ -99,8 +99,8 @@ export default function MyDocument(props) {
             ttq.page();
           }(window, document, 'ttq');
          `}
-        </Script> */}
-{/* 
+        </Script>
+
         <Script async id="microsoft-clarity-tracking" strategy="afterInteractive">
           {`
           (function(c, l, a, r, i, t, y) {
@@ -112,9 +112,9 @@ export default function MyDocument(props) {
             y.parentNode.insertBefore(t, y);
           })(window, document, "clarity", "script", "gh3ywsd4k4");
          `}
-        </Script> */}
+        </Script>
 
-        {/* <Script async id="yandex-metrika" strategy="afterInteractive">
+        <Script async id="yandex-metrika" strategy="afterInteractive">
           {`
           (function(m, e, t, r, i, k, a) {
             m[i] = m[i] || function() { (m[i].a = m[i].a || []).push(arguments); };
@@ -137,21 +137,21 @@ export default function MyDocument(props) {
             ecommerce: "dataLayer"
           });
          `}
-        </Script> */}
+        </Script>
 
-        {/* <Script
+        <Script
           type="text/javascript"
           strategy="afterInteractive"
           src="https://www.artfut.com/static/tagtag.min.js?campaign_code=98c772a893"
-        /> */}
+        />
       </Head>
-      {/* <Script
+      <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-20ZHK7ZNYB"
         strategy="afterInteractive"
-      ></Script> */}
+      ></Script>
       <body>
-        {/* <noscript
+        <noscript
           dangerouslySetInnerHTML={{
             __html: `
               <iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
@@ -176,7 +176,7 @@ export default function MyDocument(props) {
               })(window, document, 'script', 'dataLayer', '${GTM_ID}');
             `,
           }}
-        /> */}
+        />
         <Main />
         <NextScript />
       </body>
