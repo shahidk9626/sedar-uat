@@ -1,4 +1,4 @@
-import { m } from "framer-motion";
+import { m,motion } from "framer-motion";
 import { useEffect, useState } from "react";
 // @mui
 import Box from "@mui/material/Box";
@@ -34,20 +34,23 @@ export default function LoadingScreen() {
 
   return (
     <StyledRoot>
-      <m.div
+      <motion.div
         animate={{
-          scale: [1, 0.9, 0.9, 1, 1],
-          opacity: [1, 1, 1, 1, 1],
+          rotate: [0, 360], // Rotate from 0 to 360 degrees
         }}
         transition={{
-          duration: 2,
-          ease: "easeInOut",
-          repeatDelay: 1,
-          repeat: Infinity,
+          duration: 2, // Rotation speed
+          ease: "linear", // Smooth rotation
+          repeat: Infinity, // Infinite rotation
+        }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <NextLazyLoadImage
-          src="/favicon.ico"
+          src="/dancingloader.png"
           alt="Loading Logo"
           width={28}
           height={28}
@@ -64,9 +67,9 @@ export default function LoadingScreen() {
           downSmWidth={28}
           downXsWidth={28}
         />
-      </m.div>
+      </motion.div>
 
-      <Box
+      {/* <Box
         component={m.div}
         animate={{
           scale: [1.6, 1, 1, 1.6, 1.6],
@@ -82,9 +85,9 @@ export default function LoadingScreen() {
           border: (theme) =>
             `solid 3px ${alpha(theme.palette.primary.dark, 0.40)}`,
         }}
-      />
+      /> */}
 
-      <Box
+      {/* <Box
         component={m.div}
         animate={{
           scale: [1, 1.2, 1.2, 1, 1],
@@ -104,7 +107,7 @@ export default function LoadingScreen() {
           border: (theme) =>
             `solid 8px ${alpha(theme.palette.primary.dark, 0.45)}`,
         }}
-      />
+      /> */}
     </StyledRoot>
   );
 }
